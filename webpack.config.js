@@ -13,6 +13,10 @@ let config = {
     module: {
         loaders: [
             {
+                test: /\.svg$/,
+                loader: 'raw-loader'
+            },
+            {
                 test: /\.css$/,
                 loader: 'style!css'
             },
@@ -22,12 +26,12 @@ let config = {
                 exclude: /node_modules/,
                 query: {
                     cacheDirectory: true,
-                    presets: ['es2015', 'react'] //'stage-0',
+                    presets: ['es2015', 'stage-0', 'react'] //'stage-0',
                 }
             }
         ]
     }
-};
+}
 
 
 if (process.env.BUILD_TARGET === 'dev') {
@@ -59,7 +63,13 @@ if (process.env.BUILD_TARGET === 'dev') {
         ],
         module: {
             loaders: [
-                {test: /\.css$/, loader: 'style!css'},
+                {
+                    test: /\.svg$/,
+                    loader: 'raw-loader'
+                }, {
+                    test: /\.css$/,
+                    loader: 'style!css'
+                },
                 {
                     test: /\.js$/,
                     loaders: ['react-hot', 'babel?' + JSON.stringify({
@@ -72,6 +82,5 @@ if (process.env.BUILD_TARGET === 'dev') {
         }
     });
 }
-;
 
 module.exports = config;

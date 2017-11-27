@@ -20,7 +20,7 @@ routes
         res.write(contents);
         res.end();
         return next();
-    })
+    });
 
 http.createServer(function (req, res) {
     if (!routes.route(req, res)) {
