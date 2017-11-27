@@ -1,0 +1,16 @@
+.list h2{
+	text-transform: capitalize;
+}
+.list ul{
+	width: 80%;
+	background-color: #eee;
+	padding:6px;
+}
+
+.list ul li{
+	cursor:pointer;
+	background-color:#fff;
+	padding: 2px 5px;
+	margin:10px;
+	height: 30px;
+}
