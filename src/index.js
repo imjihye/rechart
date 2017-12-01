@@ -4,10 +4,9 @@ import './static/css/style.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Chart from './Components/Chart';
-
+import WCharts from './Components/WCharts';
 
 ReactDOM.render(
-    <Chart />,
+    <WCharts />,
     document.getElementById('content')
 );
