@@ -40,7 +40,7 @@ export default class WLineChart extends Component{
         return(
             <div style={{'padding': '20px'}}>
                 <h3>{type} Chart</h3>
-                <LineChart width={400} height={200} data={data}>
+                <LineChart syncId="anyId" width={400} height={200} data={data}>
                 <XAxis dataKey="name" tick={true} domain={['dataMin', 'dataMax']}/>
                 <CartesianGrid />
                 <YAxis/>

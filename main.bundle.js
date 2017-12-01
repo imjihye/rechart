@@ -40547,7 +40547,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    _recharts.LineChart,
-	                    { width: 400, height: 200, data: data },
+	                    { syncId: 'anyId', width: 400, height: 200, data: data },
 	                    _react2.default.createElement(_recharts.XAxis, { dataKey: 'name', tick: true, domain: ['dataMin', 'dataMax'] }),
 	                    _react2.default.createElement(_recharts.CartesianGrid, null),
 	                    _react2.default.createElement(_recharts.YAxis, null),
@@ -78036,21 +78036,21 @@
 	    realtime: false
 	};
 
-	var WLineChart = function (_Component) {
-	    _inherits(WLineChart, _Component);
+	var WAreaChart = function (_Component) {
+	    _inherits(WAreaChart, _Component);
 
 	    // prop type & defalt value
-	    function WLineChart(props) {
-	        _classCallCheck(this, WLineChart);
+	    function WAreaChart(props) {
+	        _classCallCheck(this, WAreaChart);
 
-	        var _this2 = _possibleConstructorReturn(this, (WLineChart.__proto__ || Object.getPrototypeOf(WLineChart)).call(this, props));
+	        var _this2 = _possibleConstructorReturn(this, (WAreaChart.__proto__ || Object.getPrototypeOf(WAreaChart)).call(this, props));
 
 	        _this2.state = initialState;
 
 	        return _this2;
 	    }
 
-	    _createClass(WLineChart, [{
+	    _createClass(WAreaChart, [{
 	        key: 'render',
 	        value: function render() {
 	            var _state = this.state,
@@ -78069,7 +78069,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    _recharts.AreaChart,
-	                    { width: 400, height: 200, data: data },
+	                    { syncId: 'anyId', width: 400, height: 200, data: data },
 	                    _react2.default.createElement(
 	                        'defs',
 	                        null,
@@ -78169,15 +78169,15 @@
 	        }
 	    }]);
 
-	    return WLineChart;
+	    return WAreaChart;
 	}(_react.Component);
 
-	WLineChart.propTypes = {
+	WAreaChart.propTypes = {
 	    type: _react.PropTypes.string,
-	    mapData: _react.PropTypes.fudnc
+	    mapData: _react.PropTypes.func
 	};
-	WLineChart.defaultProps = {};
-	exports.default = WLineChart;
+	WAreaChart.defaultProps = {};
+	exports.default = WAreaChart;
 
 /***/ })
 /******/ ]);

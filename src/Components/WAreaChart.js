@@ -18,11 +18,11 @@ const initialState ={
     realtime: false
 }
 
-export default class WLineChart extends Component{
+export default class WAreaChart extends Component{
     // prop type & defalt value
     static propTypes = {
         type: PropTypes.string,
-        mapData: PropTypes.fudnc,
+        mapData: PropTypes.func,
     }
 
     static defaultProps = {
@@ -41,7 +41,7 @@ export default class WLineChart extends Component{
             <div style={{'padding': '20px'}}>
                 <h3>{type} Chart</h3>
 
-                <AreaChart width={400} height={200} data={data}>
+                <AreaChart syncId="anyId" width={400} height={200} data={data}>
                 <defs>
                     <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
@@ -52,7 +52,7 @@ export default class WLineChart extends Component{
                 <CartesianGrid strokeDasharray="3 3" />
                 <YAxis/>
                 <Tooltip />
-                    <Area type="monotone" dataKey="value" stroke="#82ca9d" fillOpacity={1} fill="url(#color)" dot={false} isAnimationActive={false} />
+                <Area type="monotone" dataKey="value" stroke="#82ca9d" fillOpacity={1} fill="url(#color)" dot={false} isAnimationActive={false} />
                 </AreaChart>
             </div>
         )
