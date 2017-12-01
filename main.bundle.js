@@ -23814,6 +23814,10 @@
 
 	var _WLineChart2 = _interopRequireDefault(_WLineChart);
 
+	var _WAreaChart = __webpack_require__(744);
+
+	var _WAreaChart2 = _interopRequireDefault(_WAreaChart);
+
 	var _universalCookie = __webpack_require__(385);
 
 	var _universalCookie2 = _interopRequireDefault(_universalCookie);
@@ -23847,13 +23851,13 @@
 	    _createClass(WCharts, [{
 	        key: 'render',
 	        value: function render() {
-	            // WLineChart type: tps, rt_user, res_time
+	            // WLineChart & WAreaChart type: tps, rt_user, res_time
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_WLineChart2.default, { type: 'tps' }),
-	                _react2.default.createElement(_WLineChart2.default, { type: 'rt_user' }),
-	                _react2.default.createElement(_WLineChart2.default, { type: 'res_time' })
+	                _react2.default.createElement(_WAreaChart2.default, { type: 'tps' }),
+	                _react2.default.createElement(_WLineChart2.default, { type: 'res_time' }),
+	                _react2.default.createElement(_WLineChart2.default, { type: 'rt_user' })
 	            );
 	        }
 	    }]);
@@ -40548,7 +40552,7 @@
 	                    _react2.default.createElement(_recharts.CartesianGrid, null),
 	                    _react2.default.createElement(_recharts.YAxis, null),
 	                    _react2.default.createElement(_recharts.Tooltip, null),
-	                    _react2.default.createElement(_recharts.Line, { type: 'monotone', dataKey: 'value', stroke: '#8884d8', dot: false, isAnimationActive: false })
+	                    _react2.default.createElement(_recharts.Line, { type: 'basis', dataKey: 'value', stroke: '#8884d8', dot: false, isAnimationActive: false })
 	                )
 	            );
 	        }
@@ -77982,6 +77986,198 @@
 	  };
 	};
 
+
+/***/ }),
+/* 744 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(80);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _moment = __webpack_require__(264);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _recharts = __webpack_require__(390);
+
+	var _axios = __webpack_require__(718);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var instance = _axios2.default.create({
+	    baseURL: 'http://apmote.whatap.io:8080',
+	    timeout: 10000,
+	    withCredentials: true
+	});
+
+	var PCODE = '1234569339';
+
+	var initialState = {
+	    type: '',
+	    data: [],
+	    value: [],
+	    realtime: false
+	};
+
+	var WLineChart = function (_Component) {
+	    _inherits(WLineChart, _Component);
+
+	    // prop type & defalt value
+	    function WLineChart(props) {
+	        _classCallCheck(this, WLineChart);
+
+	        var _this2 = _possibleConstructorReturn(this, (WLineChart.__proto__ || Object.getPrototypeOf(WLineChart)).call(this, props));
+
+	        _this2.state = initialState;
+
+	        return _this2;
+	    }
+
+	    _createClass(WLineChart, [{
+	        key: 'render',
+	        value: function render() {
+	            var _state = this.state,
+	                type = _state.type,
+	                data = _state.data;
+
+
+	            return _react2.default.createElement(
+	                'div',
+	                { style: { 'padding': '20px' } },
+	                _react2.default.createElement(
+	                    'h3',
+	                    null,
+	                    type,
+	                    ' Chart'
+	                ),
+	                _react2.default.createElement(
+	                    _recharts.AreaChart,
+	                    { width: 400, height: 200, data: data },
+	                    _react2.default.createElement(
+	                        'defs',
+	                        null,
+	                        _react2.default.createElement(
+	                            'linearGradient',
+	                            { id: 'color', x1: '0', y1: '0', x2: '0', y2: '1' },
+	                            _react2.default.createElement('stop', { offset: '5%', stopColor: '#82ca9d', stopOpacity: 0.8 }),
+	                            _react2.default.createElement('stop', { offset: '95%', stopColor: '#82ca9d', stopOpacity: 0 })
+	                        )
+	                    ),
+	                    _react2.default.createElement(_recharts.XAxis, { dataKey: 'name', tick: true, domain: ['dataMin', 'dataMax'] }),
+	                    _react2.default.createElement(_recharts.CartesianGrid, { strokeDasharray: '3 3' }),
+	                    _react2.default.createElement(_recharts.YAxis, null),
+	                    _react2.default.createElement(_recharts.Tooltip, null),
+	                    _react2.default.createElement(_recharts.Area, { type: 'monotone', dataKey: 'value', stroke: '#82ca9d', fillOpacity: 1, fill: 'url(#color)', dot: false, isAnimationActive: false })
+	                )
+	            );
+	        }
+	    }, {
+	        key: 'mapData',
+	        value: function mapData(type, value) {
+	            var data = [];
+	            if (type === 'res_time' && value instanceof Object) {
+	                value = value.avg;
+	            }
+	            value = this.state.value.concat(value);
+
+	            value.map(function (d, i) {
+	                data.push({ name: (0, _moment2.default)(d[0]).format('HH:mm'), value: d[1] });
+	            });
+
+	            var i = 0;
+	            while (this.state.value.length && i < value.length - this.state.value.length) {
+	                data.shift();
+	                i++;
+	            }
+
+	            this.setState({
+	                data: data,
+	                value: value
+	            });
+	        }
+	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            var type = this.props.type;
+
+	            this.setState({
+	                type: type
+	            });
+	        }
+	    }, {
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var type = this.props.type;
+
+
+	            this.setState({
+	                type: type
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _state2 = this.state,
+	                type = _state2.type,
+	                realtime = _state2.realtime;
+
+	            var _this = this;
+
+	            // Optionally the request above could also be done as
+	            instance.get('/yard/api', {
+	                params: {
+	                    type: type,
+	                    pcode: PCODE,
+	                    path: '/latest/series'
+	                }
+	            }).then(function (res) {
+	                _this.mapData(type, res.data);
+
+	                if (!realtime) return;
+
+	                setInterval(function () {
+	                    instance.get('/yard/api', {
+	                        params: {
+	                            type: type,
+	                            pcode: PCODE,
+	                            path: '/latest/last'
+	                        }
+	                    }).then(function (res) {
+	                        _this.mapData(type, res.data);
+	                    });
+	                }, 5 * 1000);
+	            }).catch(function (error) {
+	                console.log(error);
+	            });
+	        }
+	    }]);
+
+	    return WLineChart;
+	}(_react.Component);
+
+	WLineChart.propTypes = {
+	    type: _react.PropTypes.string,
+	    mapData: _react.PropTypes.fudnc
+	};
+	WLineChart.defaultProps = {};
+	exports.default = WLineChart;
 
 /***/ })
 /******/ ]);
