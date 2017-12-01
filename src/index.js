@@ -4,7 +4,7 @@ import './static/css/style.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WCharts from './Components/WCharts';
+import WCharts from './Components/Whatap/WCharts';
 
 ReactDOM.render(
     <WCharts />,
