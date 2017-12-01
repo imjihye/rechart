@@ -15,7 +15,7 @@ $ npm install --save-dev
 
 ## node 서버 띄우기
 ```
-npm run server
+npm run start
 ```
 
 ## 실시간 빌드
