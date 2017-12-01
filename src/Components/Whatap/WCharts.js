@@ -4,7 +4,7 @@ import {cookie as auth} from './Meta';
 
 import WLineChart from './WLineChart';
 import WAreaChart from './WAreaChart';
-import WHitMap from './WHitMap';
+import WHitMapChart from './WHitMapChart';
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
@@ -20,11 +20,11 @@ export default class WCharts extends Component{
         // WLineChart & WAreaChart type: tps, rt_user, res_time
         return(
             <div>
-                <WAreaChart type='tps' />
+                {/* <WAreaChart type='tps' />
                 <WLineChart type='res_time' />
-                <WLineChart type='rt_user' />
+                <WLineChart type='rt_user' /> */}
 
-                <WHitMap />
+                <WHitMapChart />
             </div>
         )
     }

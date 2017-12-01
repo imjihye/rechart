@@ -6,7 +6,7 @@ export var api = {
 }
 
 export var chart = {
-    realtime: true,
+    realtime: false,
     tps: {
         title: 'TPS',
     },
