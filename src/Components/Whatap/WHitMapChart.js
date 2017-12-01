@@ -88,14 +88,23 @@ export default class WHitMapChart extends Component{
 
                     data.hit = this.state.data.hit.concat(res.data.hit);
                     data.err = this.state.data.err.concat(res.data.err);
-
-                    let i =0;
-                    while(this.state.data.hit.length && i < (data.hit.length - this.state.data.hit.length)){
+                    
+                    let i = data.hit.length - this.state.data.hit.length;
+                    console.log(i)
+                    do{
+                        console.log(i)
                         data.hit.shift();
                         data.err.shift();
-                        i++;
-                    }
-                    
+                        i--;
+                    } while(i>0);
+
+                    // let i =0;
+                    // while(this.state.data.hit.length && i < (data.hit.length - this.state.data.hit.length)){
+                    //     data.hit.shift();
+                    //     data.err.shift();
+                    //     i++;
+                    // }
+
                     this.setState({
                         data: data,
                         index: res.data.index,

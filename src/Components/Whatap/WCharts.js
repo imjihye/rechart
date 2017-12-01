@@ -20,11 +20,12 @@ export default class WCharts extends Component{
         // WLineChart & WAreaChart type: tps, rt_user, res_time
         return(
             <div>
-                {/* <WAreaChart type='tps' />
-                <WLineChart type='res_time' />
-                <WLineChart type='rt_user' /> */}
-
                 <WHitMapChart />
+                
+                <WAreaChart type='tps' />
+                <WLineChart type='res_time' />
+                <WLineChart type='rt_user' />
+
             </div>
         )
     }

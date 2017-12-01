@@ -72,11 +72,11 @@ export default class WAreaChart extends Component{
             );
         });
 
-        let i =0;
-        while(this.state.value.length && i < (value.length - this.state.value.length)){
+        let i = value.length - this.state.value.length;
+        do{
             data.shift();
-            i++;
-        }
+            i--;
+        } while(this.state.value.length && i>0);
 
         this.setState({
             data: data,
