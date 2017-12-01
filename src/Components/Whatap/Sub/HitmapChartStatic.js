@@ -1,4 +1,6 @@
 import React, {Component, PropTypes} from 'react'
+import {chart, meta, api,INTERVAL} from './../Meta'
+
 import './w3.hitmap'
 
 import jquery from 'jquery';
@@ -67,11 +69,7 @@ class HitmapChartStatic extends Component{
     makeChart(cb){
         var self = this;
         
-        setTimeout(function(){            
-            // if(self.chart) {
-            //     if(cb) cb();
-            //     return;
-            // }
+        setTimeout(function(){   
             if(self.chart) self.chart.remove();
             $(self.chartDom).html('');
             self.chart = w3.hitmapGenerate({
@@ -86,14 +84,8 @@ class HitmapChartStatic extends Component{
                             if(maxValue == 80000) {
                                 maxValue = 10000000;
                             }
-                            var link = 'hitmap_object?stime=' +
-                                data.xRange[0] + '&etime=' +
-                                data.xRange[1] + '&mintime=' +
-                                data.yRange[0] + '&maxtime=' +
-                                maxValue+ '&start=' +
-                                        data.timeRange[0] + '&end=' +
-                                        data.timeRange[1];
-                            location.href = link;
+
+                            // location.href = 'https://www.whatap.io';
                         }
                     }
                 },
@@ -202,18 +194,7 @@ class HitmapChartStatic extends Component{
 
     render(){
         return(
-        <div  style={{'height':'200px', 'width':'400px'}}>
-            <div  style={{'height':'200px', 'width':'400px'}} ref={(dom) => { this.chartDom = dom; }} />
-                {/* <Button.Group size={'small'} style={styles.buttonGroup} className="hitmapButtons">
-                    <Button onClick={this.onButtonClick.bind(this,'down')}>
-                        <SVGInline svg={DownButtonSVG}/>
-                    </Button>
-                    <Button onClick={this.onButtonClick.bind(this,'up')}>
-                        <SVGInline svg={UpButtonSVG}/>
-                    </Button>
-                </Button.Group> */}
-             
-        </div>
+            <div style={chart.style} ref={(dom) => { this.chartDom = dom; }} />
         )
     }
     

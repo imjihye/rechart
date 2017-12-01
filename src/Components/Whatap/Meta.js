@@ -1,3 +1,5 @@
+export const INTERVAL = 5 * 1000;
+
 export var api = {
     url:'http://apmote.whatap.io:8080',
     timeout:10000,
@@ -6,6 +8,14 @@ export var api = {
 }
 
 export var chart = {
+    style:{
+        width:'400px',
+        height:'200px',
+        padding:'20px',
+    }
+}
+
+export var meta = {
     realtime: true,
     hitmap: {
         title: 'HIT_MAP',

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import moment from 'moment'
-import {chart as meta, api} from './Meta'
+import {chart, meta, api, INTERVAL} from './Meta'
 
 import {LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line} from 'recharts';
 import axios from 'axios';
@@ -39,7 +39,7 @@ export default class WLineChart extends Component{
         let title = meta[type].title;
 
         return(
-            <div style={{'padding': '20px'}}>
+            <div style={{padding: chart.style.padding}}>
                 <h3>{title}</h3>
                 <LineChart syncId="anyId" width={400} height={200} data={data}>
                 <XAxis dataKey="name" tick={true} domain={['dataMin', 'dataMax']}/>
@@ -116,7 +116,7 @@ export default class WLineChart extends Component{
                 .then((res)=>{
                     _this.mapData(type, res.data);
                 })
-            },5 * 1000);
+            },INTERVAL);
         })
         .catch(error => {
             console.log(error);

@@ -153,101 +153,101 @@
         // this.tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d; });
         // this.svg.call(this.tip)
 
-        this.buttonGroupDiv = this.selectChart.append("div")
-            .attr("class", "w3-hitmap-chart-buttons")
-            .attr("style", function (){
-                return "position: absolute; right: " + that.margin.right  + "px;"
-            });
+        // this.buttonGroupDiv = this.selectChart.append("div")
+        //     .attr("class", "w3-hitmap-chart-buttons")
+        //     .attr("style", function (){
+        //         return "position: absolute; right: " + that.margin.right  + "px;"
+        //     });
 
         // this.optionsDiv = this.selectChart.append("div")
-        if(this.config.errorOnly){
-            this.onlyError = this.buttonGroupDiv
-            .append('input')
-            .attr('type', 'checkbox')
-            .attr('class', 'hitmap-error-checkbox')
-            .attr('id', 'errorOnly')
-            .attr('style', 'margin: 2px 3px 0px 0px; vertical-align: middle;')
-            .on('click', function() {
-                that.showOnlyError( $(this).is(":checked") );
-            });
+        // if(this.config.errorOnly){
+        //     this.onlyError = this.buttonGroupDiv
+        //     .append('input')
+        //     .attr('type', 'checkbox')
+        //     .attr('class', 'hitmap-error-checkbox')
+        //     .attr('id', 'errorOnly')
+        //     .attr('style', 'margin: 2px 3px 0px 0px; vertical-align: middle;')
+        //     .on('click', function() {
+        //         that.showOnlyError( $(this).is(":checked") );
+        //     });
 
-            if(this.config.visible.err === true && this.config.visible.hit === false){
-                this.onlyError.attr('checked', true);
-            }
+        //     // if(this.config.visible.err === true && this.config.visible.hit === false){
+        //     //     this.onlyError.attr('checked', true);
+        //     // }
 
-            this.buttonGroupDiv            
-            .append("label")
-            .attr('class', 'hitmap-error-text')
-            .attr('for', 'errorOnly')
-            .text('error_only')
-            .attr('style', 'margin: 0px 10px 0px 0px; vertical-align: middle;')
-        }
+        //     // this.buttonGroupDiv            
+        //     // .append("label")
+        //     // .attr('class', 'hitmap-error-text')
+        //     // .attr('for', 'errorOnly')
+        //     // .text('error_only')
+        //     // .attr('style', 'margin: 0px 10px 0px 0px; vertical-align: middle;')
+        // }
 
-        this.buttonGroup = this.buttonGroupDiv.append("div")
-            .attr("class", "btn-group btn-group-sm")
-            .attr('style', function(){
-                if (config.buttons === false) {
-                    return "display: none;"
-                }
-            })
-        if (config.buttonsLeftRight){
+        // this.buttonGroup = this.buttonGroupDiv.append("div")
+        //     .attr("class", "btn-group btn-group-sm")
+        //     .attr('style', function(){
+        //         if (config.buttons === false) {
+        //             return "display: none;"
+        //         }
+        //     })
+        // if (config.buttonsLeftRight){
             
-            this.leftButton = this.buttonGroup.append("button")
-                .attr('type', 'button')
-                .attr('class', 'btn btn-secondary')
-                .style('width', '23px')
-                .on('click', function() {
-                    that.config.buttonCallback(null, {direction: "left"});
-                });
+        //     this.leftButton = this.buttonGroup.append("button")
+        //         .attr('type', 'button')
+        //         .attr('class', 'btn btn-secondary')
+        //         .style('width', '23px')
+        //         .on('click', function() {
+        //             that.config.buttonCallback(null, {direction: "left"});
+        //         });
 
-            // this.leftButton
-            //     .append('img')
-            //     .attr('src', '/images/hitmap/hitmap-arrow-left.png')
-            //     .attr('alt', 'left')
-            //     .attr('class', 'hitmap-arrow-left');
+        //     // this.leftButton
+        //     //     .append('img')
+        //     //     .attr('src', '/images/hitmap/hitmap-arrow-left.png')
+        //     //     .attr('alt', 'left')
+        //     //     .attr('class', 'hitmap-arrow-left');
 
-            // this.rightButton = this.buttonGroup.append("button")
-            //     .attr('type', 'button')
-            //     .attr('class', 'btn btn-secondary')
-            //     .style('width', '23px')
-            //     .on('click', function() {
-            //         that.config.buttonCallback(null, {direction: 'right'});
-            //     });
+        //     // this.rightButton = this.buttonGroup.append("button")
+        //     //     .attr('type', 'button')
+        //     //     .attr('class', 'btn btn-secondary')
+        //     //     .style('width', '23px')
+        //     //     .on('click', function() {
+        //     //         that.config.buttonCallback(null, {direction: 'right'});
+        //     //     });
 
-            // this.rightButton
-            //     .append('img')
-            //     .attr('src', '/images/hitmap/hitmap-arrow-right.png')
-            //     .attr('alt', 'right')
-            //     .attr('class', 'hitmap-arrow-right');
-        }
+        //     // this.rightButton
+        //     //     .append('img')
+        //     //     .attr('src', '/images/hitmap/hitmap-arrow-right.png')
+        //     //     .attr('alt', 'right')
+        //     //     .attr('class', 'hitmap-arrow-right');
+        // }
 
-        this.upButton = this.buttonGroup.append("button")
-            .attr('type', 'button')
-            .attr('class', 'btn btn-secondary')
-            .style('width', '23px')
-            .on('click', function() {
-                that.changeYAxis('up');
-            });
+        // this.upButton = this.buttonGroup.append("button")
+        //     .attr('type', 'button')
+        //     .attr('class', 'btn btn-secondary')
+        //     .style('width', '23px')
+        //     .on('click', function() {
+        //         that.changeYAxis('up');
+        //     });
 
-        // this.upButton
-        //     .append('img')
-        //     .attr('src', '/images/hitmap/hitmap-arrow-up.png')
-        //     .attr('alt', 'up')
-        //     .attr('class', 'hitmap-arrow-up');
+        // // this.upButton
+        // //     .append('img')
+        // //     .attr('src', '/images/hitmap/hitmap-arrow-up.png')
+        // //     .attr('alt', 'up')
+        // //     .attr('class', 'hitmap-arrow-up');
 
-        this.downButton = this.buttonGroup.append("button")
-            .attr('type', 'button')
-            .attr('class', 'btn btn-secondary')
-            .style('width', '23px')
-            .on('click', function() {
-                that.changeYAxis('down');
-            });
+        // this.downButton = this.buttonGroup.append("button")
+        //     .attr('type', 'button')
+        //     .attr('class', 'btn btn-secondary')
+        //     .style('width', '23px')
+        //     .on('click', function() {
+        //         that.changeYAxis('down');
+        //     });
 
-        // this.downButton
-        //     .append('img')
-        //     .attr('src', '/images/hitmap/hitmap-arrow-down.png')
-        //     .attr('alt', 'down')
-        //     .attr('class', 'hitmap-arrow-down');
+        // // this.downButton
+        // //     .append('img')
+        // //     .attr('src', '/images/hitmap/hitmap-arrow-down.png')
+        // //     .attr('alt', 'down')
+        // //     .attr('class', 'hitmap-arrow-down');
 
 
 

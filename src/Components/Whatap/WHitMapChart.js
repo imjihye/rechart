@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import moment from 'moment'
-import {chart as meta, api} from './Meta'
+import {chart, meta, api,INTERVAL} from './Meta'
 
 import HitmapChartStatic from './Sub/HitmapChartStatic';
 
@@ -40,7 +40,7 @@ export default class WHitMapChart extends Component{
         let title = meta[type].title;
 
         return(
-            <div style={{'padding': '20px'}}>
+            <div style={{padding: chart.style.padding}}>
                 <h3>{title}</h3>
                  <HitmapChartStatic type={type} data={data} />
             </div>
@@ -90,20 +90,11 @@ export default class WHitMapChart extends Component{
                     data.err = this.state.data.err.concat(res.data.err);
                     
                     let i = data.hit.length - this.state.data.hit.length;
-                    console.log(i)
                     do{
-                        console.log(i)
                         data.hit.shift();
                         data.err.shift();
                         i--;
                     } while(i>0);
-
-                    // let i =0;
-                    // while(this.state.data.hit.length && i < (data.hit.length - this.state.data.hit.length)){
-                    //     data.hit.shift();
-                    //     data.err.shift();
-                    //     i++;
-                    // }
 
                     this.setState({
                         data: data,
@@ -111,7 +102,7 @@ export default class WHitMapChart extends Component{
                         loop: res.data.loop,
                     });
                 })
-            }, 5 * 1000);
+            }, INTERVAL);
         })
         .catch(error => {
             console.log(error);
