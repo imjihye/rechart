@@ -23840,7 +23840,8 @@
 	var WA = 'PVBVTb453Z32u3VnTR5kEtXA5bmgslue0vTckLQl3xxdQ4xr1OqyfhbBpfVr48ef';
 
 	var initialState = {
-	    data: []
+	    data: [],
+	    value: []
 	};
 
 	var Chart = function (_React$Component) {
@@ -23855,7 +23856,6 @@
 	        _this2.state = initialState;
 
 	        cookies.set('wa', WA, { domain: DOMAIN });
-
 	        return _this2;
 	    }
 
@@ -23871,7 +23871,7 @@
 	                _react2.default.createElement(
 	                    _recharts.LineChart,
 	                    { width: 400, height: 400, data: data },
-	                    _react2.default.createElement(_recharts.Line, { type: 'monotone', dataKey: 'value', stroke: '#8884d8' })
+	                    _react2.default.createElement(_recharts.Line, { type: 'monotone', dataKey: 'value', stroke: '#8884d8', dot: false, isAnimationActive: false })
 	                ),
 	                'zzzz'
 	            );
@@ -23881,12 +23881,14 @@
 	        value: function mapData(value) {
 	            var data = [];
 
+	            value = this.state.value.concat(value);
 	            value.map(function (d) {
 	                data.push({ name: d[0], value: d[1] });
 	            });
 
 	            this.setState({
-	                data: data
+	                data: data,
+	                value: value
 	            });
 	        }
 	    }, {
@@ -23904,7 +23906,7 @@
 	            }).then(function (res) {
 	                _this.mapData(res.data);
 
-	                setTimeout(function () {
+	                setInterval(function () {
 	                    instance.get('/yard/api', {
 	                        params: {
 	                            type: 'tps',
@@ -23912,18 +23914,8 @@
 	                            path: '/latest/last'
 	                        }
 	                    }).then(function (res) {
-
 	                        _this.mapData(res.data);
 	                    });
-
-	                    // t.highcharts(options);
-	                    // self.chart = t.highcharts();
-	                    // self.drawSeries();
-	                    // if( isCustomLegend === true ) self.setLegendDiv(t);
-
-	                    // if(cb) {
-	                    //     return cb();
-	                    // }
 	                }, 5 * 1000);
 	            }).catch(function (error) {
 	                console.log(error);

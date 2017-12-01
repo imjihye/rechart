@@ -19,7 +19,8 @@ const PCODE = '1234569339';
 const WA = 'PVBVTb453Z32u3VnTR5kEtXA5bmgslue0vTckLQl3xxdQ4xr1OqyfhbBpfVr48ef';
 
 const initialState ={
-    data:[]
+    data:[],
+    value:[]
 }
 
 export default class Chart extends React.Component{
@@ -36,8 +37,6 @@ export default class Chart extends React.Component{
         this.state=initialState;
         
         cookies.set('wa', WA, { domain: DOMAIN });
-
-
     }
 
     render(){
@@ -46,7 +45,7 @@ export default class Chart extends React.Component{
         return(
             <div>
                 <LineChart width={400} height={400} data={data}>
-                    <Line type="monotone" dataKey="value" stroke="#8884d8" />
+                    <Line type="monotone" dataKey="value" stroke="#8884d8" dot={false} isAnimationActive={false}/>
                 </LineChart>
                 zzzz
             </div>
@@ -55,6 +54,7 @@ export default class Chart extends React.Component{
     mapData(value){
         let data = [];
 
+        value = this.state.value.concat(value);
         value.map((d)=>{
             data.push(
                 {name: d[0], value: d[1]}
@@ -62,7 +62,8 @@ export default class Chart extends React.Component{
         });
 
         this.setState({
-            data: data
+            data: data,
+            value: value
         });
     }
     componentDidMount(){
@@ -79,7 +80,7 @@ export default class Chart extends React.Component{
         .then((res) => {
             _this.mapData(res.data);
 
-            setTimeout(()=>{
+            setInterval(()=>{
                 instance.get('/yard/api', {
                     params:{
                         type:'tps',
@@ -88,31 +89,15 @@ export default class Chart extends React.Component{
                     }
                 })
                 .then((res)=>{
-                    
                     _this.mapData(res.data);
                 })
 
 
-
-                // t.highcharts(options);
-                // self.chart = t.highcharts();
-                // self.drawSeries();
-                // if( isCustomLegend === true ) self.setLegendDiv(t);
-                
-                // if(cb) {
-                //     return cb();
-                // }
-            },5*1000)
-
+            },5 * 1000);
         })
         .catch(error => {
             console.log(error);
         });
-
-
-
-        
     }
-
 }
 
