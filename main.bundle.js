@@ -40088,7 +40088,10 @@
 	};
 
 	var chart = exports.chart = {
-	    realtime: false,
+	    realtime: true,
+	    hitmap: {
+	        title: 'HIT_MAP'
+	    },
 	    tps: {
 	        title: 'TPS'
 	    },
@@ -103536,7 +103539,8 @@
 	var initialState = {
 	    type: 'hitmap',
 	    data: {},
-	    value: [],
+	    index: 0,
+	    loop: 0,
 	    realtime: _Meta.chart.realtime
 	};
 
@@ -103556,13 +103560,21 @@
 	    _createClass(WHitMapChart, [{
 	        key: 'render',
 	        value: function render() {
-	            var data = this.state.data;
+	            var _state = this.state,
+	                type = _state.type,
+	                data = _state.data;
 
+	            var title = _Meta.chart[type].title;
 
 	            return _react2.default.createElement(
 	                'div',
-	                null,
-	                _react2.default.createElement(_HitmapChartStatic2.default, { id: 'hitmap', data: data })
+	                { style: { 'padding': '20px' } },
+	                _react2.default.createElement(
+	                    'h3',
+	                    null,
+	                    title
+	                ),
+	                _react2.default.createElement(_HitmapChartStatic2.default, { type: type, data: data })
 	            );
 	        }
 	    }, {
@@ -103570,9 +103582,9 @@
 	        value: function componentDidMount() {
 	            var _this3 = this;
 
-	            var _state = this.state,
-	                type = _state.type,
-	                realtime = _state.realtime;
+	            var _state2 = this.state,
+	                type = _state2.type,
+	                realtime = _state2.realtime;
 
 	            var _this = this;
 
@@ -103583,15 +103595,49 @@
 	                    pcode: PCODE,
 	                    path: '/latest/loop',
 	                    oid: 'sum'
-	                    // params: {
-	                    //     "index":69110,
-	                    //     "loop":1,
-	                    // }
 	                }
 	            }).then(function (res) {
 	                _this3.setState({
-	                    data: res.data
+	                    data: res.data,
+	                    index: res.data.index,
+	                    loop: res.data.loop
 	                });
+
+	                if (!realtime) return;
+
+	                setInterval(function () {
+	                    instance.get('/yard/api', {
+	                        params: {
+	                            type: type,
+	                            pcode: PCODE,
+	                            path: '/latest/loop',
+	                            oid: 'sum',
+	                            params: {
+	                                index: _this.state.index,
+	                                loop: _this.state.loop
+	                            }
+	                        }
+	                    }).then(function (res) {
+	                        var data = {};
+	                        var value = res.data.hit;
+
+	                        data.hit = _this3.state.data.hit.concat(res.data.hit);
+	                        data.err = _this3.state.data.err.concat(res.data.err);
+
+	                        var i = 0;
+	                        while (_this3.state.data.hit.length && i < data.hit.length - _this3.state.data.hit.length) {
+	                            data.hit.shift();
+	                            data.err.shift();
+	                            i++;
+	                        }
+
+	                        _this3.setState({
+	                            data: data,
+	                            index: res.data.index,
+	                            loop: res.data.loop
+	                        });
+	                    });
+	                }, 5 * 1000);
 	            }).catch(function (error) {
 	                console.log(error);
 	            });
@@ -103862,7 +103908,7 @@
 	}(_react.Component);
 
 	HitmapChartStatic.propTypes = {
-	    id: _react.PropTypes.string.isRequired,
+	    // id: PropTypes.string.isRequired,
 	    loadData: _react.PropTypes.func,
 	    loadinitData: _react.PropTypes.func,
 	    drawLegend: _react.PropTypes.bool,
@@ -104059,26 +104105,47 @@
 	                that.config.buttonCallback(null, { direction: "left" });
 	            });
 
-	            this.leftButton.append('img').attr('src', '/images/hitmap/hitmap-arrow-left.png').attr('alt', 'left').attr('class', 'hitmap-arrow-left');
+	            // this.leftButton
+	            //     .append('img')
+	            //     .attr('src', '/images/hitmap/hitmap-arrow-left.png')
+	            //     .attr('alt', 'left')
+	            //     .attr('class', 'hitmap-arrow-left');
 
-	            this.rightButton = this.buttonGroup.append("button").attr('type', 'button').attr('class', 'btn btn-secondary').style('width', '23px').on('click', function () {
-	                that.config.buttonCallback(null, { direction: 'right' });
-	            });
+	            // this.rightButton = this.buttonGroup.append("button")
+	            //     .attr('type', 'button')
+	            //     .attr('class', 'btn btn-secondary')
+	            //     .style('width', '23px')
+	            //     .on('click', function() {
+	            //         that.config.buttonCallback(null, {direction: 'right'});
+	            //     });
 
-	            this.rightButton.append('img').attr('src', '/images/hitmap/hitmap-arrow-right.png').attr('alt', 'right').attr('class', 'hitmap-arrow-right');
+	            // this.rightButton
+	            //     .append('img')
+	            //     .attr('src', '/images/hitmap/hitmap-arrow-right.png')
+	            //     .attr('alt', 'right')
+	            //     .attr('class', 'hitmap-arrow-right');
 	        }
 
 	        this.upButton = this.buttonGroup.append("button").attr('type', 'button').attr('class', 'btn btn-secondary').style('width', '23px').on('click', function () {
 	            that.changeYAxis('up');
 	        });
 
-	        this.upButton.append('img').attr('src', '/images/hitmap/hitmap-arrow-up.png').attr('alt', 'up').attr('class', 'hitmap-arrow-up');
+	        // this.upButton
+	        //     .append('img')
+	        //     .attr('src', '/images/hitmap/hitmap-arrow-up.png')
+	        //     .attr('alt', 'up')
+	        //     .attr('class', 'hitmap-arrow-up');
 
 	        this.downButton = this.buttonGroup.append("button").attr('type', 'button').attr('class', 'btn btn-secondary').style('width', '23px').on('click', function () {
 	            that.changeYAxis('down');
 	        });
 
-	        this.downButton.append('img').attr('src', '/images/hitmap/hitmap-arrow-down.png').attr('alt', 'down').attr('class', 'hitmap-arrow-down');
+	        // this.downButton
+	        //     .append('img')
+	        //     .attr('src', '/images/hitmap/hitmap-arrow-down.png')
+	        //     .attr('alt', 'down')
+	        //     .attr('class', 'hitmap-arrow-down');
+
 
 	        this.yScale = d3.scale.linear().range([this.height, 0]).domain([0, this.yAxisDomainCurrentMaxValue]);
 

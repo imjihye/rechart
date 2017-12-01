@@ -124,7 +124,8 @@ class HitmapChartStatic extends Component{
             var data = self.props.data;
             if(data[KEYS[0]].length < 1) return;
 
-            var interval = data[KEYS[0]][1][0] - data[KEYS[0]][0][0]
+
+            var interval = data[KEYS[0]][1][0] - data[KEYS[0]][0][0];
 
             this.makeChart(function(){
                 var stime = data[KEYS[0]][0][0];
@@ -223,7 +224,7 @@ class HitmapChartStatic extends Component{
 }
 
 HitmapChartStatic.propTypes = {
-    id: PropTypes.string.isRequired,
+    // id: PropTypes.string.isRequired,
     loadData: PropTypes.func,
     loadinitData: PropTypes.func,
     drawLegend: PropTypes.bool,

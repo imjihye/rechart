@@ -200,25 +200,25 @@
                     that.config.buttonCallback(null, {direction: "left"});
                 });
 
-            this.leftButton
-                .append('img')
-                .attr('src', '/images/hitmap/hitmap-arrow-left.png')
-                .attr('alt', 'left')
-                .attr('class', 'hitmap-arrow-left');
+            // this.leftButton
+            //     .append('img')
+            //     .attr('src', '/images/hitmap/hitmap-arrow-left.png')
+            //     .attr('alt', 'left')
+            //     .attr('class', 'hitmap-arrow-left');
 
-            this.rightButton = this.buttonGroup.append("button")
-                .attr('type', 'button')
-                .attr('class', 'btn btn-secondary')
-                .style('width', '23px')
-                .on('click', function() {
-                    that.config.buttonCallback(null, {direction: 'right'});
-                });
+            // this.rightButton = this.buttonGroup.append("button")
+            //     .attr('type', 'button')
+            //     .attr('class', 'btn btn-secondary')
+            //     .style('width', '23px')
+            //     .on('click', function() {
+            //         that.config.buttonCallback(null, {direction: 'right'});
+            //     });
 
-            this.rightButton
-                .append('img')
-                .attr('src', '/images/hitmap/hitmap-arrow-right.png')
-                .attr('alt', 'right')
-                .attr('class', 'hitmap-arrow-right');
+            // this.rightButton
+            //     .append('img')
+            //     .attr('src', '/images/hitmap/hitmap-arrow-right.png')
+            //     .attr('alt', 'right')
+            //     .attr('class', 'hitmap-arrow-right');
         }
 
         this.upButton = this.buttonGroup.append("button")
@@ -229,11 +229,11 @@
                 that.changeYAxis('up');
             });
 
-        this.upButton
-            .append('img')
-            .attr('src', '/images/hitmap/hitmap-arrow-up.png')
-            .attr('alt', 'up')
-            .attr('class', 'hitmap-arrow-up');
+        // this.upButton
+        //     .append('img')
+        //     .attr('src', '/images/hitmap/hitmap-arrow-up.png')
+        //     .attr('alt', 'up')
+        //     .attr('class', 'hitmap-arrow-up');
 
         this.downButton = this.buttonGroup.append("button")
             .attr('type', 'button')
@@ -243,11 +243,11 @@
                 that.changeYAxis('down');
             });
 
-        this.downButton
-            .append('img')
-            .attr('src', '/images/hitmap/hitmap-arrow-down.png')
-            .attr('alt', 'down')
-            .attr('class', 'hitmap-arrow-down');
+        // this.downButton
+        //     .append('img')
+        //     .attr('src', '/images/hitmap/hitmap-arrow-down.png')
+        //     .attr('alt', 'down')
+        //     .attr('class', 'hitmap-arrow-down');
 
 
 

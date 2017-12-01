@@ -17,7 +17,8 @@ const PCODE = api.pcode;
 const initialState ={
     type:'hitmap',
     data:{},
-    value:[],
+    index:0,
+    loop:0,
     realtime: meta.realtime
 }
 
@@ -35,11 +36,13 @@ export default class WHitMapChart extends Component{
     }
 
     render(){
-        let {data}=this.state;
-        
+        let {type, data}=this.state;
+        let title = meta[type].title;
+
         return(
-            <div> 
-                 <HitmapChartStatic id="hitmap" data={data} />
+            <div style={{'padding': '20px'}}>
+                <h3>{title}</h3>
+                 <HitmapChartStatic type={type} data={data} />
             </div>
         )
     }
@@ -54,17 +57,52 @@ export default class WHitMapChart extends Component{
                 type: type,
                 pcode: PCODE,
                 path: '/latest/loop',
-                oid: 'sum',
-                // params: {
-                //     "index":69110,
-                //     "loop":1,
-                // }
+                oid: 'sum'
             }
         })
         .then((res) => {
             this.setState({
                 data: res.data,
+                index: res.data.index,
+                loop: res.data.loop,
             });
+            
+            if(!realtime) return;
+
+            setInterval(()=>{
+                instance.get('/yard/api', {
+                    params:{
+                        type:type,
+                        pcode: PCODE,
+                        path: '/latest/loop',
+                        oid: 'sum',
+                        params:{
+                            index:_this.state.index,
+                            loop: _this.state.loop,
+                        }
+                    }
+                })
+                .then((res)=>{
+                    let data={};
+                    let value = res.data.hit;
+
+                    data.hit = this.state.data.hit.concat(res.data.hit);
+                    data.err = this.state.data.err.concat(res.data.err);
+
+                    let i =0;
+                    while(this.state.data.hit.length && i < (data.hit.length - this.state.data.hit.length)){
+                        data.hit.shift();
+                        data.err.shift();
+                        i++;
+                    }
+                    
+                    this.setState({
+                        data: data,
+                        index: res.data.index,
+                        loop: res.data.loop,
+                    });
+                })
+            }, 5 * 1000);
         })
         .catch(error => {
             console.log(error);

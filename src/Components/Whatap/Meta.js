@@ -6,7 +6,10 @@ export var api = {
 }
 
 export var chart = {
-    realtime: false,
+    realtime: true,
+    hitmap: {
+        title: 'HIT_MAP',
+    },
     tps: {
         title: 'TPS',
     },
