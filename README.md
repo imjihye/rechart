@@ -28,7 +28,8 @@ npm run build-all # 원타임 빌드 + optimize-minimize
 
 ## 브라우저 확인
 - dev port: 3000 / pro port: 3333 (pacage.json파일을 참조)
-- 클라이언트 host와 port가 서버(API)와 다른 경우 CROS문제가 발생 할 수 있습니다.
+- 클라이언트 host와 port가 서버(API)와 다른 경우 CROS문제가 발생 할 수 있습니다. (크롬 브라우저를 사용한다면 플러그인 추천  Allow-Control-Allow-Origin, Access-Control-Allow-Credentials)
+
 ```
 http://localhost:[PORT]/
 
