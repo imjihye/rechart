@@ -5,10 +5,10 @@
   "main": "webpack.config.js",
   "scripts": {
     "clean": "rm -rf *.bundle.*",
-    "build": "BUILD_TARGET=buildall webpack --progress --colors",
-    "build-watch": "BUILD_TARGET=buildall webpack --progress --colors --watch",
-    "build-all": "BUILD_TARGET=buildall webpack --progress --colors --watch --optimize-minimize",
-    "start": "npm run clean && npm run build && NODE_ENV=production node ./server/main.js",
+    "build": "BUILD_TARGET=build webpack --progress --colors",
+    "build-watch": "BUILD_TARGET=build webpack --progress --colors --watch",
+    "build-all": "BUILD_TARGET=build webpack --progress --colors --optimize-minimize",
+    "start": "npm run clean && npm run build-all && NODE_ENV=production node ./server/main.js",
     "dev": "npm run clean && npm run build && PORT=3333 NODE_ENV=dev node ./server/main.js"
   },
   "repository": {

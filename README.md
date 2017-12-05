@@ -13,7 +13,7 @@ $ npm install --save-dev
 ```
 
 ## node 서버 띄우기
-- 개발환경은 react-hot-loader를 사용하여 변경사항에 실시간으로 적용되도록 되었습니다.
+- 서버를 띄우는 방법에 따라 기본 포트가 다릅니다. (pacage.json파일을 참조)
 ```
 npm run dev # 개발 환경 (port: 3333)
 npm run start # 프러덕션 환경 (port: 3000)
