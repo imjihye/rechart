@@ -38,7 +38,7 @@ if (process.env.BUILD_TARGET === 'dev') {
     object.assign(config, {
         entry: [
             './src/index.js',
-            'webpack-dev-server/client?http://localhost:3000', // webpackDevServer host adn port
+            'webpack-dev-server/client?http://localhost:3333', // webpackDevServer host adn port
             'webpack/hot/only-dev-server' // only prevents reload on syntax errors
         ],
         output: {
